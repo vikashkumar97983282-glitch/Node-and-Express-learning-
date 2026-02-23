@@ -1,13 +1,20 @@
 {
-  "name": "erros_and_dubugging",
+  "name": "npm-test",
   "version": "1.0.0",
-  "description": "",
+  "description": "this project learn about npm tools",
   "license": "ISC",
-  "author": "",
+  "author": "vikash kumar",
   "type": "commonjs",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon app.js"
+    "start": "nodemon app.js",
+    "dev": "node app.js"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  },
+  "dependencies": {
+    "express": "^5.2.1"
   }
 }
