@@ -24,8 +24,23 @@ app.get("/",(req,res,next)=>{
 });
 
 app.get("/contact-us",(req,res,next)=>{
-    console.log("this is contact");
-    res.send("<h1> this is contact page. please fill require details</h1>")
+    console.log("handling get", req.url, req.method);
+    res.send(
+        `<h1> this is contact page. please fill require details</h1>
+        <form action="/contact-us" method="POST">
+
+        <input type="email" name="email" placeholder="enter your email"/>
+        <input type="password" name="password" placeholder="enter your password"/>
+        <button > submit </button>
+
+        </form>
+
+        `);
+});
+
+app.post("/contact-us",(req,res,next)=>{
+    console.log("handling post",req.url, req.method);
+    res.send("<h1>Thanks for your details</h1>")
 })
 
 
