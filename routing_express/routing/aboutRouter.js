@@ -18,8 +18,9 @@ aboutRouter.get("/about",(req,res,next)=>{
 });
 
 aboutRouter.post("/about",(req,res,next)=>{
+    console.log(req.body)
     res.send(`
-        
+        <h1>${req.body.user} register successfully!</h1>
         `)
 })
 
