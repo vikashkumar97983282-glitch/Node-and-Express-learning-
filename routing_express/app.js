@@ -2,20 +2,18 @@
 const express = require('express');
 
 // local modules
-const userRouter = require('./routing/userRouter')
-const hostRouter = require('./routing/hostRouter')
+const userRouter = require('./routing/userRouter');
+const hostRouter = require('./routing/hostRouter');
+const aboutRouter = require('./routing/aboutRouter')
 
 const app = express();
 
-app.use((req,res,next)=>{
-    console.log(req.url, req.method);
-    next();
-});
-
+// parsing body
 app.use(express.urlencoded());
 
 app.use(userRouter);
 app.use(hostRouter);
+app.use(aboutRouter);
 
 
 
