@@ -18,7 +18,8 @@ app.use(cors())
 
 
 
-app.get("/home",dboperation)
+app.get("/home",dboperation.getUsers);
+app.post("/set", dboperation.setUser)
 // app.use(homerouter);
 // app.use(aboutrouter);
 
