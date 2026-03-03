@@ -8,6 +8,6 @@ const pool = new Pool({
     database : 'sample'
 });
 
-pool.connect().then(()=>console.log("database connected"))
+// pool.connect().then(()=>console.log("database connected"))
 
 module.exports = pool;
