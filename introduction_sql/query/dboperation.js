@@ -6,6 +6,7 @@ const getUsers = (request, response) => {
       throw error;
     }
     response.status(200).json(result.rows);
+    console.log("user fetch data ")
   });
 };
 

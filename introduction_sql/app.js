@@ -16,8 +16,10 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded());
 app.use(cors())
 
+// to check database connection
+app.get(dboperation)
 
-
+// operations in database
 app.get("/home",dboperation.getUsers);
 app.post("/set", dboperation.setUser)
 // app.use(homerouter);
