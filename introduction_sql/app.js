@@ -9,11 +9,12 @@ const port = 3002;
 
 const homerouter = require('./page/home');
 const aboutrouter = require('./page/about');
+const showrouter = require('./page/show')
 const cors = require('cors')
 
 
 app.use(bodyParser.json())
-app.use(bodyParser.urlencoded());
+app.use(bodyParser.urlencoded({extended:true}));
 app.use(cors())
 
 // to check database connection
@@ -22,9 +23,10 @@ app.get(dboperation)
 
 app.use(homerouter);
 app.use(aboutrouter);
+app.use(showrouter);
 
 // operations in database
-app.get("/home",dboperation.getUsers);
+app.get("/show",dboperation.getUsers);
 // app.post("/about", dboperation.setUser)
 
 
