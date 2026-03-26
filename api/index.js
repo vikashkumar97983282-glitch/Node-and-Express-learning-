@@ -1,11 +1,15 @@
 const express = require('express')
 const app = express();
+const path = require('path');
+
 
 // body-parser
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 // ejs config
 app.set('view engine','ejs');
+// path
+app.use(express.static(path.join(__dirname,'public')));
 
 
 app.use((req,res,next)=>{
@@ -19,25 +23,29 @@ app.get("/",(req,res)=>{
 })
 
 app.get("/home",(req,res)=>{
-    res.send("this is home page");
-    console.log("this is home page");
+    res.send("this is home page")
 })
 
-app.get("/about",(req,res)=>{
-    res.send("this is our about page! this is testing for api");
-    console.log("this is testing ")
+// dynamic path
+app.get("/home/:anythings",(req,res)=>{
+    // use params from user search in anythings
+    res.send(req.params.anythings)
+})
+
+// two values use in params
+app.get("/home/:anythings/:value",(req,res)=>{
+    res.send(`welcome ${req.params.anythings} ${req.params.value}`)
 })
 
 
 
 
+
+
+// error show 
 app.use((req,res)=>{
-    res.status(404).send("<h1>File not found</h1>")
+    res.status(404).send("file not found!")
 })
-
-
-
-
 
 const port = 3002;
 app.listen(port,()=>{
