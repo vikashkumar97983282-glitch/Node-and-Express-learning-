@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express();
 const path = require('path');
+const fs = require('fs')
 
 
 // body-parser
@@ -12,40 +13,48 @@ app.set('view engine','ejs');
 app.use(express.static(path.join(__dirname,'public')));
 
 
-app.use((req,res,next)=>{
-    console.log("this is middleware!");
-    next();
-})
-
 app.get("/",(req,res)=>{
-    res.render("index")
-    console.log("this is main folder")
-})
-
-app.get("/home",(req,res)=>{
-    res.send("this is home page")
-})
-
-// dynamic path
-app.get("/home/:anythings",(req,res)=>{
-    // use params from user search in anythings
-    res.send(req.params.anythings)
-})
-
-// two values use in params
-app.get("/home/:anythings/:value",(req,res)=>{
-    res.send(`welcome ${req.params.anythings} ${req.params.value}`)
+    fs.readdir(`./files`,(err,files)=>{
+        res.render("index", {files:files})
+    });
+    
 })
 
 
+// app.use((req,res,next)=>{
+//     console.log("this is middleware!");
+//     next();
+// })
+
+// app.get("/",(req,res)=>{
+//     res.render("index")
+//     console.log("this is main folder")
+// })
+
+// app.get("/home",(req,res)=>{
+//     res.send("this is home page")
+// })
+
+// // dynamic path
+// app.get("/home/:anythings",(req,res)=>{
+//     // use params from user search in anythings
+//     res.send(req.params.anythings)
+// })
+
+// // two values use in params
+// app.get("/home/:anythings/:value",(req,res)=>{
+//     res.send(`welcome ${req.params.anythings} ${req.params.value}`)
+// })
 
 
 
 
-// error show 
-app.use((req,res)=>{
-    res.status(404).send("file not found!")
-})
+
+
+// // error show 
+// app.use((req,res)=>{
+//     res.status(404).send("file not found!")
+// })
 
 const port = 3002;
 app.listen(port,()=>{
