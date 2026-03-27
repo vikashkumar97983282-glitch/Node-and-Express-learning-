@@ -1,6 +1,10 @@
 const express = require('express');
 const app = express();
 const bodyparser = require('body-parser')
+const cors = require('cors');
+
+
+app.use(cors())
 
 // body-parser
 app.use(bodyparser.json());
@@ -25,9 +29,9 @@ app.get("/",(req,res)=>{
 
 app.get("/create",async (req,res)=>{
     let user = await UserModel.create({
-        name : "rahul yadav",
+        name : "rahul kumar",
         username : "rahul1234",
-        email : "ryadav210@rku.ac.in"
+        email : "rahul956@rku.ac.in"
     })
     console.log("Data insert into Database")
     res.send(user)
@@ -36,7 +40,7 @@ app.get("/create",async (req,res)=>{
 app.get("/show",async (req,res)=>{
     let user = await UserModel.find();
     res.send(user);
-    console.log(user)
+    console.log("data show ")
 })
 
 
