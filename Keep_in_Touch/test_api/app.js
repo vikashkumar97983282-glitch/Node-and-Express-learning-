@@ -1,5 +1,11 @@
 const express = require('express');
 const app = express();
+const cors = require('cors');
+const bodyParser = require('body-parser');
+
+app.use(cors());
+app.use(express.json());
+app.use(bodyParser.urlencoded({extended:true}));
 const usermodel = require('./connection/connection');
 
 
@@ -15,11 +21,14 @@ app.get("/users",async (req,res)=>{
 })
 
 
-app.get("/add",async (req,res)=>{
-    let data = await usermodel.create({
-        name : "vikash kumar",
-        age : 22,
-        email : "vikash@gmail.com"
+app.post("/add",async (req,res)=>{
+
+    const {name,age,email} = req.body
+
+    const data = await usermodel.create({
+        name : name,
+        age : age,
+        email : email
     })
     res.send("user added successfully");
 })
