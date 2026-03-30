@@ -18,6 +18,7 @@ app.get("/",(req,res)=>{
 app.get("/users",async (req,res)=>{
     let data = await usermodel.find();
     res.send(data);
+    console.log("data sent successfully!")
 })
 
 
@@ -31,6 +32,21 @@ app.post("/add",async (req,res)=>{
         email : email
     })
     res.send("user added successfully");
+    console.log("user added successfully!")
+})
+
+
+app.delete("/delete/:name",async (req,res)=>{
+    const {name} = req.params;
+    try {
+        await usermodel.deleteOne({name:name});
+        res.send("user deleted successfully");
+        console.log("user deleted successfully!")
+    } catch (error) {
+        console.error("Error deleting user:", error);
+        res.status(500).send("Error deleting user");
+
+    }
 })
 
 
