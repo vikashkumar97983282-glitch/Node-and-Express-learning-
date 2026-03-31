@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 import { useState } from "react";
 import { useEffect } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 
 function Upload(){
@@ -24,7 +24,7 @@ function Upload(){
         setName("");
         setAge("");
         setEmail("");
-        navigate("/")
+        navigate("/");
     };
 
 
