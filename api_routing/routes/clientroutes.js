@@ -3,7 +3,7 @@ const router = express.Router();
 const clientController = require("../controllers/clientcontroller")
 
 
-router.get("/dashboard",clientController.getclientDashboard)
+router.get("/",clientController.getclientDashboard)
 
 
 module.exports = router;

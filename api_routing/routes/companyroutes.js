@@ -3,7 +3,7 @@ const router = express.Router();
 const companyController = require("../controllers/companycontroller")
 
 
-router.get("/dashboard",companyController.getcompanyDashboard)
+router.get("/",companyController.getcompanyDashboard)
 
 
 module.exports = router;

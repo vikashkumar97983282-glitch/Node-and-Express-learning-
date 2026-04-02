@@ -5,6 +5,9 @@ const app = express();
 
 
 
+app.use(express.json())
+app.use(express.urlencoded({extended:true}))
+
 
 // local modules import 
 const adminRoutes = require("./routes/adminroutes")
