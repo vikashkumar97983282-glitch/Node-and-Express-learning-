@@ -3,6 +3,9 @@ const router = express.Router();
 const userModel = require('../model/user')
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const cookieParser = require('cookie-parser');
+
+router.use(cookieParser());
 
 
 router.get("/", async (req,res)=>{
@@ -10,8 +13,13 @@ router.get("/", async (req,res)=>{
     res.status(200).send(data);
 });
 
-router.post('/register', (req,res)=>{
+router.post('/register', async (req,res)=>{
     let {name,email,password,age,product} = req.body;
+
+    let user = await userModel.findOne({email});
+
+    if(user) return res.status(400).send("user already exists");
+
     bcrypt.genSalt(10, function(err, salt){
         bcrypt.hash(password, salt, async function(err, hash){
             const data = await userModel.create({
@@ -51,7 +59,26 @@ router.post('/login' , async (req,res)=>{
 router.post('/logout', (req,res)=>{
     res.clearCookie("token");
     res.status(200).send("logout successful");
+});
+
+
+router.get('/profile', isLogin, async (req,res)=>{
+    let data = await userModel.find();
+    res.send(data);
 })
+
+
+
+// login and registration 
+function isLogin(req,res,next){
+    if (req.cookies.token === "") return res.send("please login to access this page");
+    else {
+        let data = jwt.verify(req.cookies.token, "danger");
+        req.user = data;
+    }
+    next();
+}
+
 
 
 
