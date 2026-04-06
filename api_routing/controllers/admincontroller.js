@@ -6,5 +6,5 @@ const Admin = require("../models/admin_models")
 exports.getadminDashboard = async (req,res)=>{
     let user = await Admin.find();
 
-    res.send(user)
+    res.status(200).send(user)
 }
