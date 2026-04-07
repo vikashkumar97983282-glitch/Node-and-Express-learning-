@@ -4,10 +4,11 @@ const product = mongoose.Schema({
     productName: String,
     price: Number,
     description: String,
-    user: {
+    user: [
+        {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'user'
-    },
+    }],
     date: {
         type: Date,
         default: Date.now

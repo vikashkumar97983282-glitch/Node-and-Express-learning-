@@ -1,9 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const userModel = require('../model/user')
+const productModel = require('../model/product');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const cookieParser = require('cookie-parser');
+const user = require('../model/user');
 
 router.use(cookieParser());
 
@@ -66,6 +68,33 @@ router.get('/profile', isLogin, async (req,res)=>{
     let data = await userModel.find();
     res.send(data);
 })
+
+router.post('/addproduct', isLogin, async (req,res)=>{
+    let {productName, price, description} = req.body;
+    let user = await userModel.findOne({email: req.user.email});
+    console.log(user)
+
+    const product = await productModel.create({
+        productName,
+        price,
+        description,
+        user: user._id
+    })
+    user.product.push(product._id);
+    await user.save();
+    res.send(user,product)
+
+
+})
+
+router.get('/products', isLogin, async (req,res)=>{
+    let user = await userModel.findOne({email: req.user.email});
+    let data = await user.populate('product')
+    res.send(data);
+})
+
+
+
 
 
 
