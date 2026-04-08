@@ -6,6 +6,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const cookieParser = require('cookie-parser');
 const user = require('../model/user');
+const isLogin = require('../utils/registerCookies');
 
 router.use(cookieParser());
 
@@ -98,15 +99,7 @@ router.get('/products', isLogin, async (req,res)=>{
 
 
 
-// login and registration 
-function isLogin(req,res,next){
-    if (req.cookies.token === "") return res.send("please login to access this page");
-    else {
-        let data = jwt.verify(req.cookies.token, "danger");
-        req.user = data;
-    }
-    next();
-}
+
 
 
 
