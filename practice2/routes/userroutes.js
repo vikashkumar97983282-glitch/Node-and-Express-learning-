@@ -89,9 +89,9 @@ router.post('/addproduct', isLogin, async (req,res)=>{
 })
 
 router.get('/products', isLogin, async (req,res)=>{
-    let user = await userModel.findOne({email: req.user.email});
-    let data = await user.populate('product')
-    res.send(data);
+    let product = await userModel.findOne({email: req.user.email}).populate('product')
+    // let data = await user.populate('product')
+    res.send(product.product);
 })
 
 

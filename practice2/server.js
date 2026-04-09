@@ -2,10 +2,14 @@ const express = require('express');
 const app = express();
 require('dotenv').config({quiet: true});
 const bcrypt = require('bcrypt');
+const cors = require('cors'); 
 
 
 
-
+app.use(cors({
+  origin: "http://localhost:5173", // EXACT frontend URL
+  credentials: true
+}));
 app.use(express.json());
 app.use(express.urlencoded({extended:true}))
 
