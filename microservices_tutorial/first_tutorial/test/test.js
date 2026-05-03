@@ -1,7 +1,7 @@
 const autocannon = require('autocannon');
 
 const DURATION = 30;
-const URLS = ['http://localhost:3000', 'http://localhost:3000/about'];
+const URLS = ['http://localhost:3000', 'http://localhost:3000/about','http://localhost:3000/home', 'http://localhost:3000/home/hello'];
 
 function runTest(url, duration) {
   return new Promise((resolve) => {
