@@ -3,22 +3,16 @@ const morgan = require('morgan')
 const app = express()
 
 app.use(morgan('dev'))
-app.use(express())
+app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 
 
 app.get("/", (req,res)=>{
-    for (let i=0; i<1000000000; i++){
-
-    }
     res.send("this is home page");
 });
 
 app.get("/hello", (req,res)=>{
-    for (let i=0; i<1000000000; i++){
-
-    }
-    res.send("this is about page");
+    res.send("welcome to our page. visite agian!");
 });
 
 
