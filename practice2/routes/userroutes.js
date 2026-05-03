@@ -38,8 +38,17 @@ router.post('/register', async (req,res)=>{
     
 })
 
+router.get('/login', (req,res)=>{
+    // res.clearCookie('token');
+    console.log(req.user)
+    res.status(200).send("login page");
+})
+
 
 router.post('/login' , async (req,res)=>{
+
+    res.clearCookie('token');
+
     let {email,password} = req.body;
     let data = await userModel.findOne({email});
 
@@ -48,18 +57,23 @@ router.post('/login' , async (req,res)=>{
     bcrypt.compare(password, data.password, function(err, result){
         if(!result) {
 
-            return res.status(401).send("invalid credentials");
+            return res.status(401).send("something went wrong!");
         } 
 
-        let token = jwt.sign({email:email}, "danger")
-        res.cookie("token", token)
-        res.status(200).send("login successful");
+        let token = jwt.sign({email:email}, "dangertiger")
+        res.cookie("token", token,{
+            httpOnly: true,
+            secure: false,
+            sameSite: "lax",
+            maxAge: 1000 * 60 * 60 * 24
+        })
+        res.status(200).send({message:"login successful"});
     });
 
 });
 
 
-router.post('/logout', (req,res)=>{
+router.post('/logout', isLogin, (req,res)=>{
     res.clearCookie("token");
     res.status(200).send("logout successful");
 });
@@ -67,6 +81,7 @@ router.post('/logout', (req,res)=>{
 
 router.get('/profile', isLogin, async (req,res)=>{
     let data = await userModel.find();
+    console.log(req.user)
     res.send(data);
 })
 
