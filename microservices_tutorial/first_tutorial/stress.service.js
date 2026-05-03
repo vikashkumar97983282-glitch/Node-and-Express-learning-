@@ -5,7 +5,7 @@ const morgan = require('morgan')
 
 app.use(morgan('dev'))
 
-app.get("/about", (req,res)=>{
+app.get("/", (req,res)=>{
     for (let i=0; i<1000000000; i++){
 
     }

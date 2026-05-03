@@ -14,7 +14,7 @@ app.get("/", (req,res)=>{
     res.send("this is home page");
 });
 
-app.get("/about", (req,res)=>{
+app.get("/hello", (req,res)=>{
     for (let i=0; i<1000000000; i++){
 
     }
@@ -24,8 +24,8 @@ app.get("/about", (req,res)=>{
 
 
 
-const port = 3000;
+const port = 3001;
 
 app.listen(port, ()=>{
-    console.log(`server running on address http://localhost:3000`)
+    console.log(`server running on address http://localhost:3001`);
 });
